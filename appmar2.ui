@@ -1,0 +1,742 @@
+<?xml version='1.0' encoding='utf-8'?>
+<interface version="1.0">
+  <object class="tk.Toplevel" id="win-main">
+    <property name="height">200</property>
+    <property name="resizable">none</property>
+    <property name="title" translatable="yes">APPMAR 2 by CEMAN</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frm-main">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="pady">2</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="tk.LabelFrame" id="frm-management">
+            <property name="height">100</property>
+            <property name="labelanchor">n</property>
+            <property name="text" translatable="yes">Management</property>
+            <property name="width">100</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="pady">3</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property id="0" name="pad" type="col">0</property>
+              <property id="0" name="weight" type="col">0</property>
+              <property id="0" name="pad" type="row">0</property>
+              <property id="0" name="weight" type="row">0</property>
+              <property id="1" name="pad" type="row">0</property>
+              <property id="1" name="weight" type="row">0</property>
+            </layout>
+            <child>
+              <object class="tk.Checkbutton" id="chk-hs">
+                <property name="command">on_toggle_hs</property>
+                <property name="offrelief">flat</property>
+                <property name="takefocus">false</property>
+                <property name="text" translatable="yes">Significant height of combined wind waves and swell</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="columnspan">3</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
+                  <property name="sticky">w</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Checkbutton" id="chk-tp">
+                <property name="command">on_toggle_tp</property>
+                <property name="text" translatable="yes">Primary wave mean period</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="columnspan">3</property>
+                  <property name="propagate">True</property>
+                  <property name="row">1</property>
+                  <property name="sticky">w</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Checkbutton" id="chk-dp">
+                <property name="command">on_toggle_dp</property>
+                <property name="text" translatable="yes">Primary wave direction</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="columnspan">3</property>
+                  <property name="propagate">True</property>
+                  <property name="row">2</property>
+                  <property name="sticky">w</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Checkbutton" id="chk-wind">
+                <property name="command">on_toggle_wind</property>
+                <property name="text" translatable="yes">Wind</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="columnspan">3</property>
+                  <property name="propagate">True</property>
+                  <property name="row">3</property>
+                  <property name="sticky">w</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="btn-download">
+                <property name="command">on_download</property>
+                <property name="font">TkTextFont</property>
+                <property name="padx">0</property>
+                <property name="text" translatable="yes">Download</property>
+                <property name="width">8</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">4</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="btn-extract">
+                <property name="command">on_extract</property>
+                <property name="text" translatable="yes">Extract</property>
+                <property name="width">8</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="propagate">True</property>
+                  <property name="row">4</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="tk.Button" id="btn-load">
+                <property name="command">on_load</property>
+                <property name="text" translatable="yes">Load</property>
+                <property name="width">8</property>
+                <layout manager="grid">
+                  <property name="column">2</property>
+                  <property name="propagate">True</property>
+                  <property name="row">4</property>
+                  <property id="0" name="pad" type="col">0</property>
+                  <property id="1" name="pad" type="col">0</property>
+                  <property id="2" name="pad" type="col">0</property>
+                  <property id="0" name="pad" type="row">5</property>
+                  <property id="1" name="pad" type="row">5</property>
+                  <property id="2" name="pad" type="row">5</property>
+                  <property id="3" name="pad" type="row">5</property>
+                  <property id="4" name="minsize" type="row">0</property>
+                  <property id="4" name="pad" type="row">7</property>
+                  <property id="4" name="weight" type="row">0</property>
+                  <property id="5" name="pad" type="row">0</property>
+                  <property id="6" name="pad" type="row">0</property>
+                  <property id="7" name="pad" type="row">0</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="tk.LabelFrame" id="frm-analysis">
+            <property name="cursor">arrow</property>
+            <property name="font">TkDefaultFont</property>
+            <property name="height">200</property>
+            <property name="labelanchor">n</property>
+            <property name="takefocus">false</property>
+            <property name="text" translatable="yes">Analysis</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="pady">3</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property id="0" name="pad" type="col">0</property>
+              <property id="0" name="weight" type="col">0</property>
+              <property id="0" name="pad" type="row">0</property>
+              <property id="0" name="weight" type="row">0</property>
+              <property id="1" name="pad" type="row">0</property>
+              <property id="1" name="weight" type="row">0</property>
+            </layout>
+            <child>
+              <object class="tk.LabelFrame" id="frm-mean">
+                <property name="height">204</property>
+                <property name="labelanchor">n</property>
+                <property name="text" translatable="yes">Mean climate</property>
+                <property name="width">200</property>
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="propagate">False</property>
+                  <property name="row">1</property>
+                  <property id="0" name="pad" type="col">10</property>
+                  <property id="1" name="pad" type="col">10</property>
+                  <property id="0" name="pad" type="row">10</property>
+                  <property id="1" name="pad" type="row">10</property>
+                  <property id="2" name="pad" type="row">5</property>
+                </layout>
+                <child>
+                  <object class="tk.Label" id="Label_1">
+                    <property name="text" translatable="yes">Type of probability distribution</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Combobox" id="cb-distrib">
+                    <property name="state">readonly</property>
+                    <property name="values">"Significant wave height" "Period" "Joint probability"</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Button" id="btn-distrib-start">
+                    <property name="command">on_distrib</property>
+                    <property name="text" translatable="yes">Graph</property>
+                    <property name="width">8</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Separator" id="spt-rose">
+                    <property name="orient">horizontal</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="pady">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">3</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Radiobutton" id="rb-wave">
+                    <property name="anchor">w</property>
+                    <property name="highlightthickness">0</property>
+                    <property name="text" translatable="yes">Wave height rose</property>
+                    <property name="value">hs</property>
+                    <property name="variable">string:rosetype</property>
+                    <property name="width">13</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">4</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Radiobutton" id="rb-period">
+                    <property name="anchor">w</property>
+                    <property name="highlightthickness">0</property>
+                    <property name="text" translatable="yes">Wave period rose</property>
+                    <property name="value">tp</property>
+                    <property name="variable">string:rosetype</property>
+                    <property name="width">13</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">5</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Radiobutton" id="rb-wind">
+                    <property name="anchor">w</property>
+                    <property name="highlightthickness">0</property>
+                    <property name="text" translatable="yes">Wind rose</property>
+                    <property name="value">wind</property>
+                    <property name="variable">string:rosetype</property>
+                    <property name="width">13</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">6</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Button" id="btn-rose-graph">
+                    <property name="command">on_rose</property>
+                    <property name="text" translatable="yes">Generate</property>
+                    <property name="width">8</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">7</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="tk.LabelFrame" id="frm-extreme">
+                <property name="height">204</property>
+                <property name="labelanchor">n</property>
+                <property name="text" translatable="yes">Extreme climate</property>
+                <property name="width">200</property>
+                <layout manager="grid">
+                  <property name="column">1</property>
+                  <property name="propagate">False</property>
+                  <property name="row">1</property>
+                  <property id="0" name="pad" type="col">10</property>
+                  <property id="1" name="pad" type="col">10</property>
+                  <property id="0" name="pad" type="row">10</property>
+                  <property id="1" name="pad" type="row">10</property>
+                  <property id="2" name="pad" type="row">5</property>
+                </layout>
+                <child>
+                  <object class="tk.Frame" id="frm-center">
+                    <property name="height">200</property>
+                    <property name="width">200</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property id="0" name="minsize" type="col">196</property>
+                      <property id="0" name="pad" type="col">0</property>
+                      <property id="0" name="weight" type="col">0</property>
+                      <property id="0" name="minsize" type="row">178</property>
+                      <property id="0" name="pad" type="row">0</property>
+                      <property id="0" name="weight" type="row">0</property>
+                    </layout>
+                    <child>
+                      <object class="tk.Radiobutton" id="rb-gev">
+                        <property name="text" translatable="yes">GEV distribution</property>
+                        <property name="value">gev</property>
+                        <property name="variable">string:exttype</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">0</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Radiobutton" id="rb-exceedence">
+                        <property name="justify">left</property>
+                        <property name="text" translatable="yes">Exceedance probability table</property>
+                        <property name="value">table</property>
+                        <property name="variable">string:exttype</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">1</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Radiobutton" id="rb-multi-annual">
+                        <property name="justify">left</property>
+                        <property name="text" translatable="yes">Multi-annual monthly exceedance probability</property>
+                        <property name="value">multi</property>
+                        <property name="variable">string:exttype</property>
+                        <property name="wraplength">150</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">2</property>
+                          <property name="sticky">w</property>
+                        </layout>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="tk.Button" id="btn-extremal-start">
+                        <property name="command">on_generate</property>
+                        <property name="text" translatable="yes">Generate</property>
+                        <property name="width">8</property>
+                        <layout manager="grid">
+                          <property name="column">0</property>
+                          <property name="propagate">True</property>
+                          <property name="row">3</property>
+                        </layout>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="tk.LabelFrame" id="frm-map">
+            <property name="height">200</property>
+            <property name="labelanchor">n</property>
+            <property name="text" translatable="yes">10.6915°N - 76.2590°W</property>
+            <property name="width">200</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="padx">5</property>
+              <property name="pady">3</property>
+              <property name="propagate">True</property>
+              <property name="row">3</property>
+              <property id="0" name="pad" type="col">0</property>
+              <property id="0" name="weight" type="col">0</property>
+              <property id="0" name="pad" type="row">0</property>
+              <property id="0" name="weight" type="row">0</property>
+              <property id="1" name="pad" type="row">0</property>
+              <property id="1" name="weight" type="row">0</property>
+            </layout>
+            <child>
+              <object class="tk.Label" id="lbl-map">
+                <layout manager="grid">
+                  <property name="column">0</property>
+                  <property name="propagate">True</property>
+                  <property name="row">0</property>
+                  <property id="0" name="pad" type="col">5</property>
+                  <property id="0" name="pad" type="row">5</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="dlg-select-grid">
+    <property name="container">false</property>
+    <property name="modal">false</property>
+    <property name="relief">flat</property>
+    <property name="resizable">none</property>
+    <property name="takefocus">false</property>
+    <property name="title" translatable="yes">Grid selection</property>
+    <child>
+      <object class="tk.Frame" id="frm-select-grid">
+        <property name="height">186</property>
+        <property name="padx">0</property>
+        <property name="pady">0</property>
+        <property name="width">283</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="lbl-select-grid">
+            <property name="anchor">w</property>
+            <property name="text" translatable="yes">Select a grid from the list:</property>
+            <property name="width">32</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Combobox" id="cb-grid">
+            <property name="state">readonly</property>
+            <property name="values">"Global 30 min"
+"Arctic Ocean curvilinear"
+"Gulf of Mexico and NW Atlantic 10 min"
+"US West Coast 10 min"
+"Pacific Islands 10 min"
+"Alaskan 10 min"
+"North Sea Baltic 10 min"
+"Mediterranean 10 min"
+"North West Indian Ocean 10 min"
+"Australia 10 min"
+"Gulf of Mexico and NW Atlantic 4 min"
+"US West Coast 4 min"
+"Alaskan 4 min"
+"North Sea Baltic 4 min"
+"Australia 4 min"
+</property>
+            <property name="width">35</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="btn-grid-start">
+            <property name="text" translatable="yes">Start</property>
+            <property name="width">8</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="dlg-progress">
+    <property name="height">100</property>
+    <property name="modal">false</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frm-progress">
+        <property name="height">186</property>
+        <property name="padx">0</property>
+        <property name="pady">0</property>
+        <property name="width">283</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="lbl-current">
+            <property name="anchor">w</property>
+            <property name="text" translatable="yes">Downloading...</property>
+            <property name="textvariable">string:strvar-current</property>
+            <property name="width">32</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">10</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="ttk.Progressbar" id="pb-progress">
+            <property name="length">233</property>
+            <property name="mode">determinate</property>
+            <property name="orient">horizontal</property>
+            <property name="value">0</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">10</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="dlg-input-coord">
+    <property name="height">100</property>
+    <property name="modal">false</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frm-input-coord">
+        <property name="height">186</property>
+        <property name="padx">0</property>
+        <property name="pady">0</property>
+        <property name="width">283</property>
+        <layout manager="grid">
+          <property name="column">0</property>
+          <property name="padx">5</property>
+          <property name="pady">5</property>
+          <property name="propagate">True</property>
+          <property name="row">0</property>
+        </layout>
+        <child>
+          <object class="tk.Label" id="lbl-input-coord">
+            <property name="anchor">w</property>
+            <property name="text" translatable="yes">Input coordinates (latitude, longitude):</property>
+            <property name="width">32</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">0</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Entry" id="ent-coord">
+            <property name="text" translatable="yes">11.13, -74.85</property>
+            <property name="width">38</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">1</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="btn-coord-start">
+            <property name="text" translatable="yes">Start</property>
+            <property name="width">8</property>
+            <layout manager="grid">
+              <property name="column">0</property>
+              <property name="propagate">True</property>
+              <property name="row">2</property>
+              <property id="0" name="pad" type="col">5</property>
+              <property id="0" name="pad" type="row">5</property>
+              <property id="1" name="pad" type="row">5</property>
+              <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
