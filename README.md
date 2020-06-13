@@ -2,6 +2,8 @@
 
 APPMAR 2 is a Python program for marine climate analysis.
 
+![APPMAR 2 main window.](appmar2.png)
+
 Some features:
 
 * Download data from WAVEWATCH III® 30-year Hindcast Phase 2 in GRIB2 format.
