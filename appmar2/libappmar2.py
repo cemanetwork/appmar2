@@ -52,7 +52,9 @@ def azimuth(x, y):
 
 
 def parse_fname(fname):
-    _, str_lat, str_lon = os.path.splitext(fname)[0].lower().split('-')
+    _, str_lat, str_lon = os.path.splitext(
+        os.path.split(fname)[1]
+    )[0].lower().split('-')
     assert (str_lat[-1] in ['n', 's']), "Not a valid latitude."
     assert (str_lon[-1] in ['e', 'w']), "Not a valid longitude."
     lat = float(str_lat[:-1])

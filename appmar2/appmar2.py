@@ -8,6 +8,7 @@ Diego A. Casas
 Katherine Rivera
 """
 
+import os
 from datetime import datetime
 from itertools import product
 from threading import Thread
@@ -19,12 +20,12 @@ import pandas as pd
 import pygubu
 import xarray as xr
 
-from libappmar2 import (azimuth, download_grib, extractor, format_as_dms,
-                        format_filename, parse_coord, parse_fname)
-from libplot import plot_dist, plot_joint, plot_rose, save_map
+from .libappmar2 import (azimuth, download_grib, extractor, format_as_dms,
+                         format_filename, parse_coord, parse_fname, URL_BASE, PATH)
+from .libplot import plot_dist, plot_joint, plot_rose, save_map
 
-URL_BASE = 'https://polar.ncep.noaa.gov/waves/hindcasts/'
-PATH = 'nopp-phase2/{year}{month:02}/gribs/multi_reanal.{grid}.{parameter}.{year}{month:02}.grb2'
+APPMAR2_DIR = os.path.join(os.path.expanduser('~'), 'APPMAR2')
+DATA_PATH = os.path.dirname(__file__)
 YEARS = range(1979, 2009 + 1)
 MONTHS = range(1, 12 + 1)
 NMONTHS = len(YEARS) * len(MONTHS)
@@ -72,7 +73,7 @@ class APPMAR2:
         self.builder = builder = pygubu.Builder()
 
         # Load an UI file
-        builder.add_from_file('appmar2.ui')
+        builder.add_from_file(os.path.join(DATA_PATH, 'appmar2.ui'))
 
         # Create the mainwindow
         self.mainwindow = builder.get_object('win-main')
@@ -91,7 +92,7 @@ class APPMAR2:
         self.cb_distrib.current(0)
 
         self.lbl_map = builder.get_object('lbl-map')
-        photo = PhotoImage(file="ceman.png")
+        photo = PhotoImage(file=os.path.join(DATA_PATH, 'ceman.png'))
         self.lbl_map.config(image=photo)
         self.lbl_map.photo = photo
 
@@ -100,6 +101,9 @@ class APPMAR2:
 
         # Connect widgets to commands
         builder.connect_callbacks(self)
+
+        os.makedirs(APPMAR2_DIR, exist_ok=True)
+        os.chdir(APPMAR2_DIR)
 
     def run(self):
         self.mainwindow.mainloop()
@@ -217,6 +221,9 @@ class APPMAR2:
 
     def on_load(self):
         fname = askopenfilename()
+        if fname == '':
+            return
+
         def date_parser(x): return datetime.strptime(x, '%Y-%m-%d')
         self.data = pd.read_csv(
             fname,
@@ -266,8 +273,3 @@ class APPMAR2:
             self.data[VARS[rosetype][0]].values,
             rosetype
         )
-
-
-if __name__ == '__main__':
-    app = APPMAR2()
-    app.run()

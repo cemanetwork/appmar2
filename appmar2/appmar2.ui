@@ -535,12 +535,11 @@
     </child>
   </object>
   <object class="pygubu.builder.widgets.dialog" id="dlg-select-grid">
-    <property name="container">false</property>
+    <property name="height">100</property>
     <property name="modal">false</property>
-    <property name="relief">flat</property>
     <property name="resizable">none</property>
-    <property name="takefocus">false</property>
     <property name="title" translatable="yes">Grid selection</property>
+    <property name="width">200</property>
     <child>
       <object class="tk.Frame" id="frm-select-grid">
         <property name="height">186</property>
