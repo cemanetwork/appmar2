@@ -1,5 +1,8 @@
 from setuptools import find_packages, setup
 
+with open("README.md", "r") as fh:
+    long_description = fh.read()
+
 setup(
     name='appmar2',
     version='2.0.0',
@@ -11,6 +14,8 @@ setup(
     entry_points={'console_scripts': ['appmar2 = appmar2.__main__:main']},
     author='CEMAN',
     description='Python program for marine climate analysis.',
+    long_description=long_description,
+    long_description_content_type="text/markdown",
     keywords='marine climate',
     url='https://github.com/cemanetwork/appmar2',
     classifiers=['License :: OSI Approved :: MIT License']
