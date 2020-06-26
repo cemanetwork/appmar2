@@ -14,6 +14,8 @@ Some features:
 
 ## Installation
 
+For installation on Windows, open Anaconda Prompt and run the following commands:
+
 1. Install dependencies:
 
 ```
@@ -25,6 +27,10 @@ conda install -y -c conda-forge pandas=1.0.3 numpy=1.18.1 xarray=0.15.1 matplotl
 ```
 pip install pygubu appmar2
 ```
+
+## Run
+
+After installation, run the command `appmar2` on Anaconda Prompt.
 
 ## Authors
 
