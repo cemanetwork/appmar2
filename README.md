@@ -12,6 +12,20 @@ Some features:
 * Perform mean and extreme climate graphical analyses over loaded data series.
 * Show interactive statistical plots and allow the user to save them as 300-dpi PNG images.
 
+## Installation
+
+1. Install dependencies:
+
+```
+conda install -y -c conda-forge pandas=1.0.3 numpy=1.18.1 xarray=0.15.1 matplotlib=3.1.3 seaborn=0.10.0 statsmodels=0.11.0 cartopy=0.17.0 cfgrib=0.9.8.1
+```
+
+2. Install APPMAR 2:
+
+```
+pip install pygubu appmar2
+```
+
 ## Authors
 
 * Diego A. Casas
