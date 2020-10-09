@@ -67,9 +67,9 @@ def parse_fname(fname):
 
 
 def dd_to_dms(dd):
-    m, s = divmod(dd * 3600, 60)
+    m, s = divmod(abs(dd) * 3600, 60)
     d, m = divmod(m, 60)
-    return d, m, s
+    return np.sign(dd)*d, m, s
 
 def format_as_dms(dd, mode):
     d, m, s = dd_to_dms(dd)

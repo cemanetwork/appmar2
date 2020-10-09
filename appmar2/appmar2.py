@@ -62,6 +62,14 @@ DISTRIB = {
     'Joint probability': ['swh', 'perpw']
 }
 
+LABELS = {
+    'hs': 'Significant\nwave height\n(m)',
+    'swh': 'Significant wave height (m)',
+    'tp': 'Period (s)',
+    'perpw': 'Period (s)',
+    'wind': 'Wind speed\n(m/s)'
+}
+
 
 class APPMAR2:
 
@@ -251,11 +259,14 @@ class APPMAR2:
             plot_joint(
                 self.data[DISTRIB[lbl][0]],
                 self.data[DISTRIB[lbl][1]],
-                DISTRIB[lbl][0],
-                DISTRIB[lbl][1]
+                LABELS[DISTRIB[lbl][0]],
+                LABELS[DISTRIB[lbl][1]]
             )
             return
-        plot_dist(self.data[DISTRIB[lbl][0]].values, DISTRIB[lbl][0])
+        plot_dist(
+            self.data[DISTRIB[lbl][0]].values,
+            LABELS[DISTRIB[lbl][0]]
+        )
 
     def on_rose(self):
         rosetype = self.builder.tkvariables['rosetype'].get()
@@ -265,11 +276,11 @@ class APPMAR2:
             plot_rose(
                 azimuth(u, v),
                 np.sqrt(u**2 + v**2),
-                rosetype
+                LABELS[rosetype]
             )
             return
         plot_rose(
             self.data['dirpw'].values,
             self.data[VARS[rosetype][0]].values,
-            rosetype
+            LABELS[rosetype]
         )
