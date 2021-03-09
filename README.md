@@ -36,9 +36,5 @@ After installation, run the command `appmar2` on Anaconda Prompt.
 
 * German Rivillas-Ospina
 * Diego Casas
-* Mauro Maza Chamorro
-* Marianella Bolívar
-* Gabriel Ruiz
-* Roberto Guerrero
-* José Horrillo
-* Karina Díaz
+* Dennis Rudas
+* Katherine Rivera
