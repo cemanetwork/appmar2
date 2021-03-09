@@ -34,5 +34,7 @@ After installation, run the command `appmar2` on Anaconda Prompt.
 
 ## Authors
 
-* Diego A. Casas
+* German Rivillas-Ospina
+* Diego Casas
+* Dennis Rudas
 * Katherine Rivera
