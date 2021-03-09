@@ -14,6 +14,7 @@ from itertools import product
 from threading import Thread
 from tkinter import PhotoImage
 from tkinter.filedialog import askopenfilename
+from tkinter.messagebox import showinfo, showerror
 
 import numpy as np
 import pandas as pd
@@ -162,6 +163,7 @@ class APPMAR2:
             self.strvar_current.set(f'Downloading {str_month} {year}...')
             download_grib(grid=grid, param=param, year=year, month=month)
             self.pb_progress.step(1)
+        showinfo(title='Download finished', message=f'Download finished. All the data is in directory {APPMAR2_DIR}')
         self.dlg_progress.close()
 
     def show_download_progress(self):
@@ -186,18 +188,23 @@ class APPMAR2:
         lon = float(darr.longitude)
         header = True
         fname = format_filename(lat, lon)
-        with open(fname, 'a') as f:
-            for year, month in product(YEARS, MONTHS):
-                str_month = STR_MONTHS[month - 1]
-                self.strvar_current.set(f'Extracting {str_month} {year}...')
-                dsets = [load(year, month, p) for p in self.parameters]
-                ds = xr.merge(dsets, join='exact')
-                df = ds.to_dataframe().set_index('time', append=True).swaplevel()
-                df[variables][1:].to_csv(
-                    f, header=header, line_terminator='\n')
-                if header:
-                    header = False
-                self.pb_progress.step(1)
+        try:
+            with open(fname, 'x') as f:
+                for year, month in product(YEARS, MONTHS):
+                    str_month = STR_MONTHS[month - 1]
+                    self.strvar_current.set(f'Extracting {str_month} {year}...')
+                    dsets = [load(year, month, p) for p in self.parameters]
+                    ds = xr.merge(dsets, join='exact')
+                    df = ds.to_dataframe().set_index('time', append=True).swaplevel()
+                    df[variables][1:].to_csv(
+                        f, header=header, line_terminator='\n')
+                    if header:
+                        header = False
+                    self.pb_progress.step(1)
+            showinfo(title='Output file', message=f'Time series file {fname} written in directory {APPMAR2_DIR}')
+        except FileExistsError:
+            showerror(title='File already exist', message=f'You are trying to extract time series from a point you already extracted. You can find the time series file {fname} in {APPMAR2_DIR}')
+        self.dlg_progress.close()
 
     def show_extract_progress(self):
         self.dlg_input_coord.close()
@@ -250,6 +257,7 @@ class APPMAR2:
             self.lbl_map.photo = photo
         except:
             pass
+        showinfo(title='Load file', message=f'File {fname} was correctly loaded. Now you can run analyses and generate plots.')
 
     def on_distrib(self):
         if self.data is None:
@@ -284,3 +292,6 @@ class APPMAR2:
             self.data[VARS[rosetype][0]].values,
             LABELS[rosetype]
         )
+
+    def on_ext(self):
+        pass

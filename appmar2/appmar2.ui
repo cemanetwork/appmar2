@@ -233,7 +233,7 @@
               <property name="padx">5</property>
               <property name="pady">3</property>
               <property name="propagate">True</property>
-              <property name="row">2</property>
+              <property name="row">1</property>
               <property id="0" name="pad" type="col">0</property>
               <property id="0" name="weight" type="col">0</property>
               <property id="0" name="pad" type="row">0</property>
@@ -250,15 +250,13 @@
                 <layout manager="grid">
                   <property name="column">0</property>
                   <property name="propagate">False</property>
-                  <property name="row">1</property>
+                  <property name="row">0</property>
                   <property id="0" name="pad" type="col">10</property>
                   <property id="1" name="pad" type="col">10</property>
                   <property id="0" name="pad" type="row">10</property>
-                  <property id="1" name="pad" type="row">10</property>
-                  <property id="2" name="pad" type="row">5</property>
                 </layout>
                 <child>
-                  <object class="tk.Label" id="Label_1">
+                  <object class="tk.Label" id="lbl-typeofdist">
                     <property name="text" translatable="yes">Type of probability distribution</property>
                     <layout manager="grid">
                       <property name="column">0</property>
@@ -293,8 +291,7 @@
                 <child>
                   <object class="tk.Button" id="btn-distrib-start">
                     <property name="command">on_distrib</property>
-                    <property name="text" translatable="yes">Graph</property>
-                    <property name="width">8</property>
+                    <property name="text" translatable="yes">Estimate</property>
                     <layout manager="grid">
                       <property name="column">0</property>
                       <property name="propagate">True</property>
@@ -392,7 +389,6 @@
                   <object class="tk.Button" id="btn-rose-graph">
                     <property name="command">on_rose</property>
                     <property name="text" translatable="yes">Generate</property>
-                    <property name="width">8</property>
                     <layout manager="grid">
                       <property name="column">0</property>
                       <property name="propagate">True</property>
@@ -417,82 +413,75 @@
                 <layout manager="grid">
                   <property name="column">1</property>
                   <property name="propagate">False</property>
-                  <property name="row">1</property>
-                  <property id="0" name="pad" type="col">10</property>
+                  <property name="row">0</property>
                   <property id="1" name="pad" type="col">10</property>
                   <property id="0" name="pad" type="row">10</property>
-                  <property id="1" name="pad" type="row">10</property>
-                  <property id="2" name="pad" type="row">5</property>
                 </layout>
                 <child>
-                  <object class="tk.Frame" id="frm-center">
-                    <property name="height">200</property>
-                    <property name="width">200</property>
+                  <object class="tk.Label" id="lbl-distname">
+                    <property name="text" translatable="yes">Distribution name</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="columnspan">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">0</property>
+                      <property id="0" name="minsize" type="col">98</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Combobox" id="cb-distname">
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="columnspan">2</property>
+                      <property name="propagate">True</property>
+                      <property name="row">1</property>
+                      <property id="0" name="minsize" type="col">98</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Button" id="btn-fit">
+                    <property name="text" translatable="yes">Fit</property>
+                    <property name="width">6</property>
                     <layout manager="grid">
                       <property name="column">0</property>
                       <property name="propagate">True</property>
-                      <property name="row">0</property>
-                      <property id="0" name="minsize" type="col">196</property>
-                      <property id="0" name="pad" type="col">0</property>
-                      <property id="0" name="weight" type="col">0</property>
-                      <property id="0" name="minsize" type="row">178</property>
-                      <property id="0" name="pad" type="row">0</property>
-                      <property id="0" name="weight" type="row">0</property>
+                      <property name="row">2</property>
+                      <property id="0" name="minsize" type="col">98</property>
+                      <property id="2" name="pad" type="row">10</property>
                     </layout>
-                    <child>
-                      <object class="tk.Radiobutton" id="rb-gev">
-                        <property name="text" translatable="yes">GEV distribution</property>
-                        <property name="value">gev</property>
-                        <property name="variable">string:exttype</property>
-                        <layout manager="grid">
-                          <property name="column">0</property>
-                          <property name="propagate">True</property>
-                          <property name="row">0</property>
-                          <property name="sticky">w</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="tk.Radiobutton" id="rb-exceedence">
-                        <property name="justify">left</property>
-                        <property name="text" translatable="yes">Exceedance probability table</property>
-                        <property name="value">table</property>
-                        <property name="variable">string:exttype</property>
-                        <layout manager="grid">
-                          <property name="column">0</property>
-                          <property name="propagate">True</property>
-                          <property name="row">1</property>
-                          <property name="sticky">w</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="tk.Radiobutton" id="rb-multi-annual">
-                        <property name="justify">left</property>
-                        <property name="text" translatable="yes">Multi-annual monthly exceedance probability</property>
-                        <property name="value">multi</property>
-                        <property name="variable">string:exttype</property>
-                        <property name="wraplength">150</property>
-                        <layout manager="grid">
-                          <property name="column">0</property>
-                          <property name="propagate">True</property>
-                          <property name="row">2</property>
-                          <property name="sticky">w</property>
-                        </layout>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="tk.Button" id="btn-extremal-start">
-                        <property name="command">on_generate</property>
-                        <property name="text" translatable="yes">Generate</property>
-                        <property name="width">8</property>
-                        <layout manager="grid">
-                          <property name="column">0</property>
-                          <property name="propagate">True</property>
-                          <property name="row">3</property>
-                        </layout>
-                      </object>
-                    </child>
+                  </object>
+                </child>
+                <child>
+                  <object class="tk.Button" id="btn-bestfit">
+                    <property name="text" translatable="yes">Best fit</property>
+                    <property name="width">6</property>
+                    <layout manager="grid">
+                      <property name="column">1</property>
+                      <property name="propagate">True</property>
+                      <property name="row">2</property>
+                      <property id="1" name="minsize" type="col">98</property>
+                      <property id="2" name="pad" type="row">10</property>
+                    </layout>
+                  </object>
+                </child>
+                <child>
+                  <object class="ttk.Separator" id="spt-tab">
+                    <property name="orient">horizontal</property>
+                    <layout manager="grid">
+                      <property name="column">0</property>
+                      <property name="columnspan">2</property>
+                      <property name="pady">3</property>
+                      <property name="propagate">True</property>
+                      <property name="row">3</property>
+                      <property id="0" name="minsize" type="col">98</property>
+                      <property id="2" name="pad" type="row">10</property>
+                      <property id="3" name="minsize" type="row">0</property>
+                      <property id="3" name="pad" type="row">0</property>
+                      <property id="3" name="weight" type="row">0</property>
+                      <property id="8" name="pad" type="row">10</property>
+                    </layout>
                   </object>
                 </child>
               </object>
@@ -510,7 +499,7 @@
               <property name="padx">5</property>
               <property name="pady">3</property>
               <property name="propagate">True</property>
-              <property name="row">3</property>
+              <property name="row">2</property>
               <property id="0" name="pad" type="col">0</property>
               <property id="0" name="weight" type="col">0</property>
               <property id="0" name="pad" type="row">0</property>
@@ -732,6 +721,54 @@
               <property id="0" name="pad" type="row">5</property>
               <property id="1" name="pad" type="row">5</property>
               <property id="2" name="pad" type="row">5</property>
+            </layout>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="pygubu.builder.widgets.dialog" id="dlg-report">
+    <property name="height">100</property>
+    <property name="modal">false</property>
+    <property name="width">200</property>
+    <child>
+      <object class="tk.Frame" id="frm-report">
+        <property name="height">200</property>
+        <property name="width">200</property>
+        <layout manager="pack">
+          <property name="propagate">True</property>
+          <property name="side">top</property>
+        </layout>
+        <child>
+          <object class="pygubu.builder.widgets.tkscrollbarhelper" id="sbh-report">
+            <property name="scrolltype">both</property>
+            <property name="usemousewheel">false</property>
+            <layout manager="pack">
+              <property name="padx">5</property>
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
+            </layout>
+            <child>
+              <object class="tk.Text" id="txt-report">
+                <property name="height">10</property>
+                <property name="width">50</property>
+                <layout manager="pack">
+                  <property name="propagate">True</property>
+                  <property name="side">top</property>
+                </layout>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="tk.Button" id="btn-report">
+            <property name="text" translatable="yes">OK</property>
+            <property name="width">6</property>
+            <layout manager="pack">
+              <property name="pady">5</property>
+              <property name="propagate">True</property>
+              <property name="side">top</property>
             </layout>
           </object>
         </child>
