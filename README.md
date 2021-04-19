@@ -19,7 +19,7 @@ For installation on Windows, open Anaconda Prompt and run the following commands
 1. Install dependencies:
 
 ```
-conda install -y -c conda-forge pandas=1.0.3 numpy=1.18.1 xarray=0.15.1 matplotlib=3.1.3 seaborn=0.10.0 statsmodels=0.11.0 cartopy=0.17.0 cfgrib=0.9.8.1
+conda install -y -c conda-forge pandas>=1.0.3 numpy>=1.18.1 xarray>=0.15.1 matplotlib>=3.1.3 seaborn>=0.10.0 statsmodels>=0.11.0 cartopy>=0.17.0 cfgrib>=0.9.8.1
 ```
 
 2. Install APPMAR 2:
