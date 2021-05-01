@@ -31,7 +31,7 @@ YEARS = range(1979, 2009 + 1)
 MONTHS = range(1, 12 + 1)
 NMONTHS = len(YEARS) * len(MONTHS)
 GRID_ID = {
-    'Global 30 min': 'glo_30m',
+    'Global 30 min': 'glo_30m_ext',
     'Arctic Ocean curvilinear': 'aoc_15m',
     'Gulf of Mexico and NW Atlantic 10 min': 'ecg_10m',
     'US West Coast 10 min': 'wc_10m',
