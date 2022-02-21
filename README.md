@@ -36,5 +36,6 @@ After installation, run the command `appmar2` on Anaconda Prompt.
 
 * German Rivillas-Ospina
 * Diego Casas
-* Dennis Rudas
+* L.Paola Ospina
 * Katherine Rivera
+* Dennis Rudas
