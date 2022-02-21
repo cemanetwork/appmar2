@@ -12,7 +12,7 @@ import os
 from datetime import datetime
 from itertools import product
 from threading import Thread
-from tkinter import PhotoImage
+from tkinter import PhotoImage, END
 from tkinter.filedialog import askopenfilename
 from tkinter.messagebox import showinfo, showerror
 
@@ -22,8 +22,9 @@ import pygubu
 import xarray as xr
 
 from .libappmar2 import (azimuth, download_grib, extractor, format_as_dms,
-                         format_filename, parse_coord, parse_fname, URL_BASE, PATH)
-from .libplot import plot_dist, plot_joint, plot_rose, save_map
+                         format_filename, parse_coord, parse_fname, compute_clusters,
+                         create_report, seastates, URL_BASE, PATH)
+from .libplot import plot_dist, plot_joint, plot_rose, save_map, plot_clusters, plot_pot_month
 
 APPMAR2_DIR = os.path.join(os.path.expanduser('~'), 'APPMAR2')
 DATA_PATH = os.path.dirname(__file__)
@@ -89,6 +90,8 @@ class APPMAR2:
 
         self.dlg_select_grid = None
         self.cb_grid = None
+        self.dlg_report = None
+        self.txt_report = None
         self.btn_grid_start = None
         self.dlg_progress = None
         self.strvar_current = None
@@ -99,6 +102,8 @@ class APPMAR2:
 
         self.cb_distrib = builder.get_object('cb-distrib')
         self.cb_distrib.current(0)
+
+        self.strvar_percentile = builder.get_variable("strvar_percentile")
 
         self.lbl_map = builder.get_object('lbl-map')
         photo = PhotoImage(file=os.path.join(DATA_PATH, 'ceman.png'))
@@ -156,6 +161,17 @@ class APPMAR2:
         else:
             self.dlg_input_coord.show()
 
+    def show_dlg_report(self, text):
+        if self.dlg_report is None:
+            self.dlg_report = self.builder.get_object(
+                'dlg-report', self.mainwindow)
+            self.txt_report = self.builder.get_object('txt-report')
+            self.dlg_report.run()
+        else:
+            self.dlg_report.show()
+        self.txt_report.delete('1.0', END)
+        self.txt_report.insert('1.0', text)
+
     def download_gribs(self):
         grid = GRID_ID[self.cb_grid.get()]
         for year, month, param in product(YEARS, MONTHS, self.parameters):
@@ -163,7 +179,8 @@ class APPMAR2:
             self.strvar_current.set(f'Downloading {str_month} {year}...')
             download_grib(grid=grid, param=param, year=year, month=month)
             self.pb_progress.step(1)
-        showinfo(title='Download finished', message=f'Download finished. All the data is in directory {APPMAR2_DIR}')
+        showinfo(title='Download finished',
+                 message=f'Download finished. All the data is in directory {APPMAR2_DIR}')
         self.dlg_progress.close()
 
     def show_download_progress(self):
@@ -192,7 +209,8 @@ class APPMAR2:
             with open(fname, 'x') as f:
                 for year, month in product(YEARS, MONTHS):
                     str_month = STR_MONTHS[month - 1]
-                    self.strvar_current.set(f'Extracting {str_month} {year}...')
+                    self.strvar_current.set(
+                        f'Extracting {str_month} {year}...')
                     dsets = [load(year, month, p) for p in self.parameters]
                     ds = xr.merge(dsets, join='exact')
                     df = ds.to_dataframe().set_index('time', append=True).swaplevel()
@@ -201,9 +219,11 @@ class APPMAR2:
                     if header:
                         header = False
                     self.pb_progress.step(1)
-            showinfo(title='Output file', message=f'Time series file {fname} written in directory {APPMAR2_DIR}')
+            showinfo(title='Output file',
+                     message=f'Time series file {fname} written in directory {APPMAR2_DIR}')
         except FileExistsError:
-            showerror(title='File already exist', message=f'You are trying to extract time series from a point you already extracted. You can find the time series file {fname} in {APPMAR2_DIR}')
+            showerror(title='File already exist',
+                      message=f'You are trying to extract time series from a point you already extracted. You can find the time series file {fname} in {APPMAR2_DIR}')
         self.dlg_progress.close()
 
     def show_extract_progress(self):
@@ -257,24 +277,29 @@ class APPMAR2:
             self.lbl_map.photo = photo
         except:
             pass
-        showinfo(title='Load file', message=f'File {fname} was correctly loaded. Now you can run analyses and generate plots.')
+        showinfo(title='Load file',
+                 message=f'File {fname} was correctly loaded. Now you can run analyses and generate plots.')
 
     def on_distrib(self):
         if self.data is None:
             return
         lbl = self.cb_distrib.get()
         if "Joint" in lbl:
-            plot_joint(
-                self.data[DISTRIB[lbl][0]],
-                self.data[DISTRIB[lbl][1]],
-                LABELS[DISTRIB[lbl][0]],
-                LABELS[DISTRIB[lbl][1]]
-            )
+            h1 = DISTRIB[lbl][0]
+            h2 = DISTRIB[lbl][1]
+            x1 = self.data[h1].values
+            x2 = self.data[h2].values
+            t1 = LABELS[h1]
+            t2 = LABELS[h2]
+            plot_joint(x1, x2, t1, t2)
+            self.show_dlg_report(create_report(x1, t1) +
+                                 '\n' + create_report(x2, t2))
             return
-        plot_dist(
-            self.data[DISTRIB[lbl][0]].values,
-            LABELS[DISTRIB[lbl][0]]
-        )
+        h = DISTRIB[lbl][0]
+        x = self.data[h].values
+        t = LABELS[h]
+        plot_dist(x, t)
+        self.show_dlg_report(create_report(x, t))
 
     def on_rose(self):
         rosetype = self.builder.tkvariables['rosetype'].get()
@@ -293,5 +318,21 @@ class APPMAR2:
             LABELS[rosetype]
         )
 
+    def on_seastates(self):
+        hs = self.data["swh"].values
+        tp = self.data["perpw"].values
+        pairs = np.column_stack((hs, tp))
+        centers, labels = compute_clusters(pairs)
+        plot_clusters(pairs, centers, labels)
+        self.show_dlg_report(seastates(centers))
+
     def on_ext(self):
         pass
+
+    def on_peaks(self):
+        str_p = self.strvar_percentile.get()
+        months, npeaks, th = plot_pot_month(self.data, str_p)
+        txt = f"*Average number of events per year*\nP{str_p} of H (m) = {th}\n"
+        for m, n in zip(months, npeaks):
+            txt += f"{m}: {n}\n"
+        self.show_dlg_report(txt)

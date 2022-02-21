@@ -4,6 +4,9 @@ import urllib.request
 
 import numpy as np
 import xarray as xr
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from kneed import KneeLocator
 
 URL_BASE = 'https://polar.ncep.noaa.gov/waves/hindcasts/'
 PATH = 'nopp-phase2/{year}{month:02}/gribs/multi_reanal.{grid}.{param}.{year}{month:02}.grb2'
@@ -71,8 +74,43 @@ def dd_to_dms(dd):
     d, m = divmod(m, 60)
     return np.sign(dd)*d, m, s
 
+
 def format_as_dms(dd, mode):
     d, m, s = dd_to_dms(dd)
     dirs = ['N', 'S'] if mode == 'lat' else ['E', 'W']
     sym = dirs[1] if d < 0 else dirs[0]
     return f'{abs(d):.0f}°{m:.0f}\'{s:.0f}"{sym}'
+
+
+def compute_clusters(pairs):
+    scaler = StandardScaler()
+    scaled_pairs = scaler.fit_transform(pairs)
+    sse = []
+    for k in range(1, 11):
+        kmeans = KMeans(n_clusters=k)
+        kmeans.fit(scaled_pairs)
+        sse.append(kmeans.inertia_)
+    kl = KneeLocator(range(1, 11), sse, curve="convex", direction="decreasing")
+    k = kl.elbow
+    kmeans = KMeans(n_clusters=k)
+    kmeans.fit(scaled_pairs)
+    centers = scaler.inverse_transform(kmeans.cluster_centers_)
+    labels = kmeans.labels_
+    return centers, labels
+
+
+def create_report(x, t):
+    p25, p50, p75 = np.quantile(x, [0.25, 0.50, 0.75])
+    report = f"*{t}*\n" \
+        f"Mean: {np.mean(x)}\n" \
+        f"SD: {np.std(x)}\n" \
+        f"P25: {p25}\n" \
+        f"P50: {p50}\n" \
+        f"P75: {p75}\n"
+    return report
+
+def seastates(centers):
+    txt = "*Representative sea states*\nH (m), T (s)\n"
+    for h, t in centers:
+        txt += f"{h}, {t}\n"
+    return txt

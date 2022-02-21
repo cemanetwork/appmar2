@@ -31,6 +31,8 @@ DIRS = np.linspace(0, 15*tau/16, 16)
 RANGE = (-11.25, 371.25)
 BARWIDTH = tau/16
 
+STR_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
 
 def plot_dist(data, lbl):
     kde = sm.nonparametric.KDEUnivariate(data)
@@ -52,7 +54,7 @@ def plot_joint(x, y, xlbl, ylbl):
     fig, ax = plt.subplots(figsize=(WIDTH, HEIGHT))
     cmap = sns.cubehelix_palette(rot=0, hue=1, light=1, dark=0, as_cmap=True)
     sns.kdeplot(x, y, shade=True, shade_lowest=False,
-                cut=0, cbar=True, cmap=cmap)
+                cut=0, cbar=True, cbar_kws={'label': 'Probability density'}, cmap=cmap)
     ax.set_xlabel(xlbl)
     ax.set_ylabel(ylbl)
     fig.tight_layout()
@@ -121,3 +123,30 @@ def save_map(filename, lon, lat):
     ax.add_feature(cfeature.LAKES, alpha=0.2)
     ax.add_feature(cfeature.RIVERS, linewidth=0.5)
     fig.savefig(filename, dpi=100)
+
+
+def plot_clusters(pairs, centers, labels):
+    fig, ax = plt.subplots(figsize=(WIDTH, HEIGHT))
+    sns.scatterplot(x=pairs[:, 0], y=pairs[:, 1], hue=labels.astype(str), ax=ax, s=2)
+    ax.get_legend().remove()
+    ax.scatter(centers[:, 0], centers[:, 1], c="white", s=10, edgecolor="k")
+    ax.set_xlabel("Significant wave height (m)")
+    ax.set_ylabel("Period (s)")
+    fig.tight_layout()
+    fig.show()
+
+def plot_pot_month(df, str_p):
+    q = int(str_p) / 100
+    th = df.swh.quantile(q)
+    nyears = len(df.time.dt.year.unique())
+    pot = df.time[df.swh > th].groupby(df.time.dt.month).agg({"count"}) / nyears
+    fig, ax = plt.subplots(figsize=(WIDTH, HEIGHT))
+    npeaks = pot.values.flatten()
+    b = ax.bar(STR_MONTHS, npeaks, color="gray", label=f"$H_s$ > {th:.2f} m (P{str_p})")
+    # ax.bar_label(b, fmt="%.1f", size=6)
+    ax.set_ylabel("Average number of events per year")
+    ax.tick_params(axis="x", labelrotation=60)
+    ax.legend(handlelength=0,handletextpad=0, frameon=False)
+    fig.tight_layout()
+    fig.show()
+    return (STR_MONTHS, npeaks, th)
