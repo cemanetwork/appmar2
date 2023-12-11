@@ -215,7 +215,7 @@ class APPMAR2:
                     ds = xr.merge(dsets, join='exact')
                     df = ds.to_dataframe().set_index('time', append=True).swaplevel()
                     df[variables][1:].to_csv(
-                        f, header=header, line_terminator='\n')
+                        f, header=header)
                     if header:
                         header = False
                     self.pb_progress.step(1)
